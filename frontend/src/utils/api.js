@@ -1,10 +1,9 @@
-const api = "http://localhost:3001/"
+const api = "http://localhost:3001"
 
 // Generate token
 
-let token = localStorage.token
-if (!token)
-    token = localStorage.token = Math.random().toString(36).substr(-8)
+let token = 124354454
+
 
 const headers = {
     'Accept': 'Application/json',
@@ -35,7 +34,7 @@ export const getAllPosts = () =>
 
 export const getPost = (postId) =>
     fetch(`${api}/postId`, {
-        header
+        headers
     })
     .then(res => res.json())
     .then(data => data.post)
