@@ -1,6 +1,6 @@
 import {
     GET_CATEGORIES
-} from '../actions/categories'
+} from '../actions/types'
 
 
 function categories(state = [], action) {
