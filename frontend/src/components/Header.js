@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
 
+import { Menu, Icon } from "antd";
+
 class Header extends Component {
   state = {
-    categories: []
+    categories: [],
+    mode: "inline",
+    theme: "light"
   };
 
   componentDidMount() {
@@ -15,28 +19,49 @@ class Header extends Component {
   }
 
   render() {
+    const { categories } = this.state;
+
     return (
-      <ul>
-        <li>
-          <Link to="/">All</Link>
-        </li>
-        <li>
-          <Link to="/react">React</Link>
-        </li>
-        <li>
-          <Link to="/redux">Redux</Link>
-        </li>
-        <li>
-          <Link to="/udacity">Udacity</Link>
-        </li>
-      </ul>
+      <div className="header">
+        {/* <div>
+          <Menu
+            style={{ width: 256 }}
+            defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
+            mode={this.state.mode}
+            theme={this.state.theme}
+          >
+            <Menu.Item key="1">
+              <Link to="/" className="nav-text">
+                <Icon type="calendar" />All
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item key="2">
+              <Icon type="calendar" />
+              Navigation Two
+            </Menu.Item>
+          </Menu>
+        </div> */}
+
+        <span>
+          <Link to="/" className="nav-text">
+            <Icon type="home" />All
+          </Link>
+        </span>
+        <ul>
+          {categories.map(category => (
+            <li key={category.name}>
+              <Link to={`/${category.path}`}>{category.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-    console.log(state);
-    
   return {
     categories: state.categories
   };
