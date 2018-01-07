@@ -2,7 +2,7 @@ const api = "http://localhost:3001"
 
 // Generate token
 
-let token = 124354454
+let token = localStorage.token
 
 
 const headers = {
