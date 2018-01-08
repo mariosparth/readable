@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { fetchAllPosts } from "../actions/posts";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Posts extends Component {
   state = {
@@ -9,21 +10,31 @@ class Posts extends Component {
 
   componentDidMount() {
     this.props.fetchAllPosts().then(data => {
-      console.log(data);
-      
       this.setState({ posts: data.posts });
     });
-    
-    
   }
 
   render() {
-    return <div>test</div>;
+    const { posts } = this.state;
+
+    return (
+      <div className="main-content">
+        {posts.map(post => (
+          <div className="post" key={post.id}>
+            <h3>{post.title}</h3>
+            <p><b>Time:</b> {post.timestamp}</p>
+            <p><b>Body:</b> {post.body}</p>
+            <p><b>Author:</b>  {post.author}</p>
+            <p><b>Category:</b> {post.category}</p>
+            <p><b>Votes:</b> {post.voteScore}</p>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
-  console.log("test");
   return {
     posts: state.posts
   };
