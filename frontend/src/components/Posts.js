@@ -16,19 +16,53 @@ class Posts extends Component {
 
   render() {
     const { posts } = this.state;
+    const { category } = this.props;
 
     return (
       <div className="main-content">
-        {posts.map(post => (
-          <div className="post" key={post.id}>
-            <h3>{post.title}</h3>
-            <p><b>Time:</b> {post.timestamp}</p>
-            <p><b>Body:</b> {post.body}</p>
-            <p><b>Author:</b>  {post.author}</p>
-            <p><b>Category:</b> {post.category}</p>
-            <p><b>Votes:</b> {post.voteScore}</p>
-          </div>
-        ))}
+        {category
+          ? posts.filter(post => post.category === category).map(post => (
+              <div className="post" key={post.id}>
+                <h3>{post.title}</h3>
+                <p>
+                  <b>Time:</b> {post.timestamp}
+                </p>
+                <p>
+                  <b>Body:</b> {post.body}
+                </p>
+                <p>
+                  <b>Author:</b> {post.author}
+                </p>
+                <p>
+                  <b>Category:</b> {post.category}
+                </p>
+                <p>
+                  <b>Votes:</b> {post.voteScore}
+                </p>
+              </div>
+            ))
+          : posts.map(post => (
+              <div className="post" key={post.id}>
+                <h3>{post.title}</h3>
+                <p>
+                  <b>Time:</b> {post.timestamp}
+                </p>
+                <p>
+                  <b>Body:</b> {post.body}
+                </p>
+                <p>
+                  <b>Author:</b> {post.author}
+                </p>
+                <p>
+                  <b>Category:</b> {post.category}
+                </p>
+                <p>
+                  <b>Votes:</b> {post.voteScore}
+                </p>
+              </div>
+            ))}
+
+        {}
       </div>
     );
   }
