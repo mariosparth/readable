@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { fetchAllPosts } from "../actions/posts";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button, Icon } from "antd";
 
 class Posts extends Component {
   state = {
-    posts: []
+    posts: [],
+    sort: false
   };
 
   componentDidMount() {
@@ -14,12 +16,54 @@ class Posts extends Component {
     });
   }
 
+  order(type) {
+    const { posts } = this.props.posts;
+    const { sort } = this.state;
+
+    if(type === 'voteScore'){
+      return this.setState({
+        posts: posts.sort((a, b) => {
+          if(!sort) {
+            return a.voteScore > b.voteScore;
+          }else {
+            return a.voteScore < b.voteScore;
+          }
+        }),
+        sort: !sort
+      });
+      
+    } else {
+      return this.setState({
+        posts: posts.sort((a, b) => {
+          if(!sort) {
+            return a.timestamp > b.timestamp;
+          }else {
+            return a.timestamp < b.timestamp;
+          }
+        }),
+        sort: !sort
+      });
+    }
+  }
+
   render() {
     const { posts } = this.state;
     const { category } = this.props;
 
     return (
       <div className="main-content">
+        <div className="control-buttons">
+          <Button className="space" type="primary" onClick={() => this.order("timestamp")}>
+            Sort by Time
+          </Button>
+          <Button className="space" type="primary" onClick={() => this.order("voteScore")}>
+            Sort by Score
+          </Button>
+          <Link className="space" to="/new">
+            <Button title="Add new post" icon="file-add" />
+          </Link>
+        </div>
+
         {category
           ? posts.filter(post => post.category === category).map(post => (
               <div className="post" key={post.id}>

@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+.space {
+  margin-left: 5px !important;
+}
