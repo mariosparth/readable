@@ -86,7 +86,7 @@ class AddPost extends Component {
 
     return (
       <div>
-        <Button icon="file-add" className="Add-post" onClick={this.showModal} />
+        <Button icon="file-add" className="Add-post" title="Add New Post" onClick={this.showModal} />
         <Modal
           title="Add New Post"
           visible={this.state.visible}
@@ -152,7 +152,7 @@ class AddPost extends Component {
                 />
               }
             </FormItem>
-            <FormItem>
+            <FormItem style={{display: 'none'}}>
               {<Button onClick={() => this.handleAdd()}>Add a Post</Button>}
             </FormItem>
           </Form>
