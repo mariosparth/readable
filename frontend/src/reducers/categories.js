@@ -9,8 +9,7 @@ function categories(state = [], action) {
     switch (action.type) {
         case GET_CATEGORIES:
             return {
-                ...state,
-                categories
+                ...categories
             };
         default:
             return state;
