@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { fetchAllPosts } from "../actions/posts";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button, Icon } from "antd";
+import React, { Component } from 'react';
+import { fetchAllPosts } from '../actions/posts';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Icon } from 'antd';
+import AddPost from './AddPost'
 
 class Posts extends Component {
   state = {
     posts: [],
-    sort: false
+    sort: false,
   };
 
   componentDidMount() {
-    this.props.fetchAllPosts().then(data => {
+    this.props.fetchAllPosts().then((data) => {
       this.setState({ posts: data.posts });
     });
   }
@@ -33,6 +34,7 @@ class Posts extends Component {
       });
       
     } else {
+      
       return this.setState({
         posts: posts.sort((a, b) => {
           if(!sort) {
@@ -43,7 +45,8 @@ class Posts extends Component {
         }),
         sort: !sort
       });
-    }
+    
+    } 
   }
 
   render() {
@@ -53,20 +56,21 @@ class Posts extends Component {
     return (
       <div className="main-content">
         <div className="control-buttons">
-          <Button className="space" type="primary" onClick={() => this.order("timestamp")}>
+          <AddPost />
+
+          <Button className="space" type="primary" onClick={() => this.order('timestamp')}>
             Sort by Time
           </Button>
-          <Button className="space" type="primary" onClick={() => this.order("voteScore")}>
+          <Button className="space" type="primary" onClick={() => this.order('voteScore')}>
             Sort by Score
           </Button>
-          <Link className="space" to="/new">
-            <Button title="Add new post" icon="file-add" />
-          </Link>
+          
+
         </div>
 
         {category
           ? posts.filter(post => post.category === category).map(post => (
-              <div className="post" key={post.id}>
+            <div className="post" key={post.id}>
                 <h3>{post.title}</h3>
                 <p>
                   <b>Time:</b> {post.timestamp}
@@ -86,7 +90,7 @@ class Posts extends Component {
               </div>
             ))
           : posts.map(post => (
-              <div className="post" key={post.id}>
+            <div className="post" key={post.id}>
                 <h3>{post.title}</h3>
                 <p>
                   <b>Time:</b> {post.timestamp}
@@ -112,10 +116,8 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = (state) => ({
     posts: state.posts
-  };
-};
+  });
 
 export default connect(mapStateToProps, { fetchAllPosts })(Posts);
