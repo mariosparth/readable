@@ -53,25 +53,45 @@ class Posts extends Component {
     const { posts } = this.state;
     const { category } = this.props;
 
-    return (
-      <div className="main-content">
+    return <div className="main-content">
         <div className="control-buttons">
           <AddPost />
 
-          <Button className="space" type="primary" onClick={() => this.order('timestamp')}>
+          <Button className="space" type="primary" onClick={() => this.order("timestamp")}>
             Sort by Time
           </Button>
-          <Button className="space" type="primary" onClick={() => this.order('voteScore')}>
+          <Button className="space" type="primary" onClick={() => this.order("voteScore")}>
             Sort by Score
           </Button>
-          
-
         </div>
 
-        {category
-          ? posts.filter(post => post.category === category).map(post => (
-            <div className="post" key={post.id}>
-                <h3>{post.title}</h3>
+        {category ? posts
+              .filter(post => post.category === category)
+              .map(post => (
+                <div className="post" key={post.id}>
+                  <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
+                    <h3>{post.title}</h3>
+                  </Link>
+                  <p>
+                    <b>Time:</b> {post.timestamp}
+                  </p>
+                  <p>
+                    <b>Body:</b> {post.body}
+                  </p>
+                  <p>
+                    <b>Author:</b> {post.author}
+                  </p>
+                  <p>
+                    <b>Category:</b> {post.category}
+                  </p>
+                  <p>
+                    <b>Votes:</b> {post.voteScore}
+                  </p>
+                </div>
+              )) : posts.map(post => <div className="post" key={post.id}>
+                <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
+                  <h3 className="nav-text">{post.title}</h3>
+                </Link>
                 <p>
                   <b>Time:</b> {post.timestamp}
                 </p>
@@ -87,32 +107,10 @@ class Posts extends Component {
                 <p>
                   <b>Votes:</b> {post.voteScore}
                 </p>
-              </div>
-            ))
-          : posts.map(post => (
-            <div className="post" key={post.id}>
-                <h3>{post.title}</h3>
-                <p>
-                  <b>Time:</b> {post.timestamp}
-                </p>
-                <p>
-                  <b>Body:</b> {post.body}
-                </p>
-                <p>
-                  <b>Author:</b> {post.author}
-                </p>
-                <p>
-                  <b>Category:</b> {post.category}
-                </p>
-                <p>
-                  <b>Votes:</b> {post.voteScore}
-                </p>
-              </div>
-            ))}
+              </div>)}
 
         {}
-      </div>
-    );
+      </div>;
   }
 }
 

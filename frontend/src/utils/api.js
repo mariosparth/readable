@@ -32,15 +32,14 @@ export const getAllPosts = () =>
     .then(data => data);
 
 
-export const getPost = postId =>
-  fetch(`${api}/postId`, {
+export const getPost = id =>
+  fetch(`${api}/posts/${id}`, {
     headers,
   })
     .then(res => res.json())
-    .then(data => data.post);
+    .then(data => data);
 
 export const addPost = (postData) => {
-  console.log(JSON.stringify(postData));
   return fetch(
     `${api}/posts`,
     {

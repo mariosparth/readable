@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, ADD_POST } from "../actions/types";
+import { GET_ALL_POSTS, ADD_POST, GET_POST } from "../actions/types";
 
 export default function posts(state = {}, action) {
 
@@ -9,11 +9,14 @@ export default function posts(state = {}, action) {
         posts: action.posts,
       };
     case ADD_POST:
-    console.log('action.post',action.post);
-    
       return {
         ...state,
         posts: state.posts.push(action.post),
+      };
+    case GET_POST:
+      return {
+        ...state,
+        thisPost: action.post,
       };
     default:
       return state;
