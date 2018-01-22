@@ -20,7 +20,7 @@ class AddPost extends Component {
     timestamp: Date.now()
   };
 
-  handleChange(e) {    
+  handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -54,6 +54,7 @@ class AddPost extends Component {
   handleOk = e => {
     this.validate();
     const dataPost = this.state;
+    // /console.log(dataPost.timestamp.toUTCString());
     this.props.addPost(dataPost);
     this.setState({
       visible: false
@@ -115,9 +116,6 @@ class AddPost extends Component {
                       );
                     })}
                 </Select>
-
-
-
               }
             </FormItem>
             <FormItem {...formItemLayout} label="Author">

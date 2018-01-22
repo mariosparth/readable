@@ -12,14 +12,14 @@ class Post extends Component {
     parentId: this.props.match.params.id
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getPost(id);
     this.props.getComments(id);
   }
 
 
-  
+
   render() {
     const { post } = this.props;
     const { comments } = this.props.comments;
@@ -34,7 +34,7 @@ class Post extends Component {
               <p>{post.body}</p>
               <div>Post Score: {post.voteScore}</div>
               <h4>Number of comments: {post.commentCount}</h4>
-              <Moment unix>{post.timestamp}</Moment>
+              <Moment unix>{post.timestamp / 1000}</Moment>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>

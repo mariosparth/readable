@@ -3,7 +3,8 @@ import { fetchAllPosts } from '../actions/posts';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from 'antd';
-import AddPost from './AddPost'
+import AddPost from './AddPost';
+import Moment from "react-moment";
 
 class Posts extends Component {
   state = {
@@ -32,9 +33,9 @@ class Posts extends Component {
         }),
         sort: !sort
       });
-      
+
     } else {
-      
+
       return this.setState({
         posts: posts.sort((a, b) => {
           if(!sort) {
@@ -45,8 +46,8 @@ class Posts extends Component {
         }),
         sort: !sort
       });
-    
-    } 
+
+    }
   }
 
   render() {
@@ -72,9 +73,7 @@ class Posts extends Component {
                   <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
                     <h3>{post.title}</h3>
                   </Link>
-                  <p>
-                    <b>Time:</b> {post.timestamp}
-                  </p>
+                  <p>Created at: <Moment unix>{post.timestamp / 1000}</Moment></p>
                   <p>
                     <b>Body:</b> {post.body}
                   </p>
@@ -92,9 +91,9 @@ class Posts extends Component {
                 <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
                   <h3 className="nav-text">{post.title}</h3>
                 </Link>
-                <p>
-                  <b>Time:</b> {post.timestamp}
-                </p>
+
+                <p>Created at: <Moment unix>{post.timestamp / 1000}</Moment></p>
+
                 <p>
                   <b>Body:</b> {post.body}
                 </p>
