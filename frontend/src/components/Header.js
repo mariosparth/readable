@@ -10,13 +10,25 @@ class Header extends Component {
     categories: [],
     mode: "inline",
     theme: "light",
-    active: false
+    active: 'all'
   };
 
   componentDidMount() {
     this.props.fetchCategories().then(data => {
       this.setState({ categories: data.categories });
     });
+  }
+
+  someFunct(category) {
+    if(category){
+      this.setState({
+        active: category.name
+      });
+    } else {
+      this.setState({
+        active: 'all'
+      });
+    }
   }
 
   render() {
@@ -47,14 +59,14 @@ class Header extends Component {
 
         <span>
           <Link to="/" className="nav-text">
-          <Button className="space" type="">
+          <Button onClick={() => this.someFunct()} className={this.state.active ===  'all' ? 'active' : ''} type="">
             <Icon type="home" />All
             </Button>
           </Link>
         </span>
         <span>
           {categories.map(category => (
-            <Button key={category.name}>
+            <Button key={category.name} onClick={() => this.someFunct(category)} className={this.state.active ===  category.name ? 'active' : ''}>
               <Link to={`/${category.path}`}>{category.name}</Link>
             </Button>
           ))}
