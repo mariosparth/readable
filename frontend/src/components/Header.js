@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
 
-import { Menu, Icon } from "antd";
+import { Menu, Icon, Button } from "antd";
 
 class Header extends Component {
   state = {
     categories: [],
     mode: "inline",
-    theme: "light"
+    theme: "light",
+    active: false
   };
 
   componentDidMount() {
@@ -46,16 +47,18 @@ class Header extends Component {
 
         <span>
           <Link to="/" className="nav-text">
+          <Button className="space" type="">
             <Icon type="home" />All
+            </Button>
           </Link>
         </span>
-        <ul>
+        <span>
           {categories.map(category => (
-            <li key={category.name}>
+            <Button key={category.name}>
               <Link to={`/${category.path}`}>{category.name}</Link>
-            </li>
+            </Button>
           ))}
-        </ul>
+        </span>
       </div>
     );
   }
