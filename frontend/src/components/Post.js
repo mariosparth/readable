@@ -3,7 +3,7 @@ import Header from "./Header";
 import { connect } from "react-redux";
 import { getPost } from "../actions/posts";
 import { getComments } from "../actions/comments";
-import Timestamp from 'react-timestamp'
+import Moment from "react-moment";
 
 class Post extends Component {
   state = {
@@ -34,6 +34,7 @@ class Post extends Component {
               <p>{post.body}</p>
               <div>Post Score: {post.voteScore}</div>
               <h4>Number of comments: {post.commentCount}</h4>
+              <Moment unix>{post.timestamp}</Moment>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
