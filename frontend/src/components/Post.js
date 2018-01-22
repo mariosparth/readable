@@ -3,26 +3,47 @@ import Header from "./Header";
 import { connect } from "react-redux";
 import { getPost } from "../actions/posts";
 import { getComments } from "../actions/comments";
+import Timestamp from 'react-timestamp'
 
 class Post extends Component {
   state = {
-      post: {},
-      comments: {}
+    author: "",
+    body: "",
+    parentId: this.props.match.params.id
   };
 
-  componentDidMount() {
+  componentWillMount() {
     const { id } = this.props.match.params;
     this.props.getPost(id);
     this.props.getComments(id);
   }
 
+
+  
   render() {
     const { post } = this.props;
-    const { comments } = this.props; 
+    const { comments } = this.props.comments;
     console.log(post);
     console.log(comments);
-    
-    return <div>test</div>;
+
+    return <div className="main-content">
+        {post && post.title ? <div className="post-details">
+            <div className="post-content">
+              <h2>{post.title}</h2>
+              <p>written by {post.author}</p>
+              <p>{post.body}</p>
+              <div>Post Score: {post.voteScore}</div>
+              <h4>Number of comments: {post.commentCount}</h4>
+            </div>
+            {comments && comments.map(comment => {
+                return <div className="post-comment" key={comment.id}>
+                    <p>{comment.author} wrote:</p>
+                    <div>{comment.body}</div>
+                    <div>Comment Score: {comment.voteScore}</div>
+                  </div>;
+              })}
+          </div> : <div> This post doesn't exist.</div>}
+      </div>;
   }
 }
 
@@ -33,4 +54,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {getPost, getComments})(Post);
+export default connect(mapStateToProps, { getPost, getComments })(Post);

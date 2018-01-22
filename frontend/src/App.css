@@ -16,6 +16,22 @@
   margin-right: 30px;
 }
 
+.post-details {
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  min-width: 350px;
+}
+
+.post-content {
+  padding: 10px 10px 0;
+}
+
+.post-comment {
+  background: grey;
+  color: white;
+  padding: 10px;
+  margin: 5px 0;
+}
 
 .space {
   margin-left: 5px !important;
