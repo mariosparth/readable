@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import EditPost from "./EditPost";
 import { connect } from "react-redux";
 import { getPost } from "../actions/posts";
 import { getComments } from "../actions/comments";
@@ -29,12 +30,13 @@ class Post extends Component {
     return <div className="main-content">
         {post && post.title ? <div className="post-details">
             <div className="post-content">
+              <EditPost id={post.id}/>
               <h2>{post.title}</h2>
               <p>written by {post.author}</p>
               <p>{post.body}</p>
               <div>Post Score: {post.voteScore}</div>
+              <p>Last edit at: <Moment unix>{post.timestamp / 1000}</Moment></p>
               <h4>Number of comments: {post.commentCount}</h4>
-              <Moment unix>{post.timestamp / 1000}</Moment>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>

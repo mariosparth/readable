@@ -36,3 +36,9 @@ export const getPostAction = post => ({
 
 export const getPost = id => dispatch => api.getPost(id)
   .then(post => dispatch(getPostAction(post)));
+
+
+export const editPost = (post) => (dispatch) => {
+  return api.editPost(post)
+    .then(post => dispatch(getPostAction(post)))
+}

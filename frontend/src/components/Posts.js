@@ -73,7 +73,7 @@ class Posts extends Component {
                   <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
                     <h3>{post.title}</h3>
                   </Link>
-                  <p>Created at: <Moment unix>{post.timestamp / 1000}</Moment></p>
+                  <p>Last edited at: <Moment unix>{post.timestamp / 1000}</Moment></p>
                   <p>
                     <b>Body:</b> {post.body}
                   </p>
@@ -92,7 +92,7 @@ class Posts extends Component {
                   <h3 className="nav-text">{post.title}</h3>
                 </Link>
 
-                <p>Created at: <Moment unix>{post.timestamp / 1000}</Moment></p>
+                <p>Last edited at: <Moment unix>{post.timestamp / 1000}</Moment></p>
 
                 <p>
                   <b>Body:</b> {post.body}

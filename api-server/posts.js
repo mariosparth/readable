@@ -14,17 +14,6 @@ const defaultData = {
     deleted: false,
     commentCount: 2
   },
-  "8xf0y6ziyjabvozed253nd": {
-    id: '8xf0y6ziyjabvozdd253nk',
-    timestamp: 1467166872600,
-    title: 'Udacity is the best place to learn React 2',
-    body: 'Everyone says so after all.',
-    author: 'thingtwo',
-    category: 'react',
-    voteScore: 4,
-    deleted: false,
-    commentCount: 4
-  },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,

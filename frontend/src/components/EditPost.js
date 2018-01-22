@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Modal, Button, Icon, Form, Input, Select, message } from "antd";
+import { Modal, Button, Icon, Form, Input, Select } from "antd";
 import { connect } from "react-redux";
-import { addPost } from "../actions/posts";
+import { getPost, editPost } from "../actions/posts";
 import uuid from "uuid";
 
 const { TextArea } = Input;
@@ -9,16 +9,24 @@ const { TextArea } = Input;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class AddPost extends Component {
+class EditPost extends Component {
   state = {
-    id: uuid(),
-    author: "",
-    category: "",
-    title: "",
-    body: "",
-    voteScore: 1,
+    author: '',
+    category: '',
+    title: '',
+    body: '',
     timestamp: Date.now()
   };
+
+  componentDidMount() {
+    const { id } = this.props;
+    this.props.getPost(id);
+  }
+
+  componentWillReceiveProps({post}) {
+    this.setState({...post});
+    console.log(this.state);
+  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -42,7 +50,7 @@ class AddPost extends Component {
     if (msg === "") {
       return;
     }
-    return message.error(msg);
+    return alert(msg);
   }
 
   showModal = () => {
@@ -52,13 +60,12 @@ class AddPost extends Component {
   };
 
   handleOk = e => {
-    this.validate();
-    const dataPost = this.state;
-    // /console.log(dataPost.timestamp.toUTCString());
-    this.props.addPost(dataPost);
+    const editPostData = this.state;
+    this.props.editPost(editPostData);
     this.setState({
       visible: false
     });
+    console.log('this.state.visible', this.state.visible);
   };
 
   handleCancel = e => {
@@ -72,7 +79,7 @@ class AddPost extends Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories} = this.props;
 
     const formItemLayout = {
       labelCol: {
@@ -87,7 +94,11 @@ class AddPost extends Component {
 
     return (
       <div>
-        <Button icon="file-add" className="Add-post" title="Add New Post" onClick={this.showModal} />
+        <div className="action-controls">
+          <Button icon="edit" type="primary" title="Edit Post" onClick={this.showModal} />
+          <Button icon="delete" type="danger"  title="Delete Post" onClick={this.deletePost} />
+        </div>
+
         <Modal
           title="Add New Post"
           visible={this.state.visible}
@@ -151,7 +162,7 @@ class AddPost extends Component {
               }
             </FormItem>
             <FormItem style={{display: 'none'}}>
-              {<Button onClick={() => this.handleAdd()}>Add a Post</Button>}
+              {<Button onClick={() => this.handleOk()}>Add a Post</Button>}
             </FormItem>
           </Form>
         </Modal>
@@ -160,6 +171,11 @@ class AddPost extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({ categories });
+const mapStateToProps = ({ posts, categories }) => {
+    return {
+      categories,
+      post: posts.thisPost
+    }
+ };
 
-export default connect(mapStateToProps, { addPost })(AddPost);
+export default connect(mapStateToProps, { getPost, editPost })(EditPost);
