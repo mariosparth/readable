@@ -60,10 +60,18 @@ class EditPost extends Component {
   };
 
   openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: 'The Post has been upadted successfully',
+    if(type === 'success'){
+      notification[type]({
+        message: 'The Post has been upadted',
+        duration: 3.5
+      });
+
+  } else {
+    notification['success']({
+      message: 'The Post has been deleted',
       duration: 3.5
     });
+    }
   };
 
   handleOk = e => {
@@ -90,6 +98,7 @@ class EditPost extends Component {
     const deletePostData = this.state;
     this.props.deletePost(deletePostData);
     this.props.history.push('/');
+    this.openNotificationWithIcon('successDeletion');
   }
 
   render() {
