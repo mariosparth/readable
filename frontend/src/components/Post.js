@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Header from "./Header";
 import EditPost from "./EditPost";
 import { connect } from "react-redux";
-import { getPost } from "../actions/posts";
+import { getPost, deletePost } from "../actions/posts";
 import { getComments } from "../actions/comments";
 import Moment from "react-moment";
 
@@ -24,8 +23,6 @@ class Post extends Component {
   render() {
     const { post } = this.props;
     const { comments } = this.props.comments;
-    console.log(post);
-    console.log(comments);
 
     return <div className="main-content">
         {post && post.title ? <div className="post-details">
@@ -57,4 +54,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getPost, getComments })(Post);
+export default connect(mapStateToProps, { getPost, getComments, deletePost })(Post);

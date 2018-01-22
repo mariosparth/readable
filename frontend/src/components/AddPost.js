@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Icon, Form, Input, Select, message } from "antd";
+import { Modal, Button, Form, Input, Select, message, notification } from "antd";
 import { connect } from "react-redux";
 import { addPost } from "../actions/posts";
 import uuid from "uuid";
@@ -51,6 +51,15 @@ class AddPost extends Component {
     });
   };
 
+
+  openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: 'New Post has been added successfully',
+      duration: 3.5
+    });
+  };
+
+
   handleOk = e => {
     this.validate();
     const dataPost = this.state;
@@ -59,6 +68,7 @@ class AddPost extends Component {
     this.setState({
       visible: false
     });
+    this.openNotificationWithIcon('success');
   };
 
   handleCancel = e => {

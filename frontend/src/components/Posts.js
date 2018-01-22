@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchAllPosts } from '../actions/posts';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 import AddPost from './AddPost';
 import Moment from "react-moment";
 

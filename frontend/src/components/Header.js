@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
 
-import { Menu, Icon, Button } from "antd";
+import { Icon, Button } from "antd";
 
 class Header extends Component {
   state = {

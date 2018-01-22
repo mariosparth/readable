@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, ADD_POST, GET_POST } from "../actions/types";
+import { GET_ALL_POSTS, ADD_POST, GET_POST, DELETE_POST } from "../actions/types";
 
 export default function posts(state = {}, action) {
 
@@ -18,6 +18,13 @@ export default function posts(state = {}, action) {
         ...state,
         thisPost: action.post,
       };
+
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(p => p.id !== action.post.id),
+      };
+
     default:
       return state;
   }

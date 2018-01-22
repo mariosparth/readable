@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Modal, Button, Icon, Form, Input, Select } from "antd";
+import { Modal, Button, Form, Input, Select, notification, Popconfirm } from "antd";
 import { connect } from "react-redux";
-import { getPost, editPost } from "../actions/posts";
-import uuid from "uuid";
+import { getPost, editPost, deletePost } from "../actions/posts";
+import { withRouter } from 'react-router';
 
 const { TextArea } = Input;
 
@@ -25,7 +25,7 @@ class EditPost extends Component {
 
   componentWillReceiveProps({post}) {
     this.setState({...post});
-    console.log(this.state);
+    //console.log(this.state);
   }
 
   handleChange(e) {
@@ -59,13 +59,20 @@ class EditPost extends Component {
     });
   };
 
+  openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: 'The Post has been upadted successfully',
+      duration: 3.5
+    });
+  };
+
   handleOk = e => {
     const editPostData = this.state;
     this.props.editPost(editPostData);
     this.setState({
       visible: false
     });
-    console.log('this.state.visible', this.state.visible);
+    this.openNotificationWithIcon('success');
   };
 
   handleCancel = e => {
@@ -76,6 +83,13 @@ class EditPost extends Component {
 
   handleChangeSelect = val => {
     this.setState({ category: val});
+  }
+
+  deletePost = () => {
+    console.log('this.state ',this.state);
+    const deletePostData = this.state;
+    this.props.deletePost(deletePostData);
+    this.props.history.push('/');
   }
 
   render() {
@@ -96,11 +110,15 @@ class EditPost extends Component {
       <div>
         <div className="action-controls">
           <Button icon="edit" type="primary" title="Edit Post" onClick={this.showModal} />
-          <Button icon="delete" type="danger"  title="Delete Post" onClick={this.deletePost} />
+
+          <Popconfirm title="Are you sure delete this post?" onConfirm={this.deletePost}  okText="Yes" cancelText="No"  placement="bottomRight">
+              <Button icon="delete" type="danger"  title="Delete Post" />
+          </Popconfirm>
+
         </div>
 
         <Modal
-          title="Add New Post"
+          title="Edit the post"
           visible={this.state.visible}
           onOk={this.handleOk}
           okText={"Submit"}
@@ -178,4 +196,4 @@ const mapStateToProps = ({ posts, categories }) => {
     }
  };
 
-export default connect(mapStateToProps, { getPost, editPost })(EditPost);
+export default withRouter(connect(mapStateToProps, { getPost, editPost, deletePost })(EditPost));
