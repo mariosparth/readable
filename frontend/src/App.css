@@ -55,10 +55,6 @@
   float: right;
 }
 
-.action-controls.comment {
-  display: none;
-}
-
 .action-controls button{
   margin-left: 5px;
 }

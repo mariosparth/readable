@@ -159,9 +159,6 @@ class AddPost extends Component {
                 />
               }
             </FormItem>
-            <FormItem style={{display: 'none'}}>
-              {<Button onClick={() => this.handleAdd()}>Add a Post</Button>}
-            </FormItem>
           </Form>
         </Modal>
       </div>

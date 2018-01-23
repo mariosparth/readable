@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Form, Input, Select, notification, Popconfirm } from "antd";
 import { connect } from "react-redux";
-import { getComment, editComment, deleteComment } from "../actions/posts";
+import { getComment, editComment, deleteComment } from "../actions/comments";
 import { withRouter } from 'react-router';
 
 const { TextArea } = Input;
@@ -11,13 +11,12 @@ const Option = Select.Option;
 
 class EditComment extends Component {
   state = {
-
+    visible: false
   };
 
   componentDidMount() {
-  }
-
-  componentWillReceiveProps({post}) {
+    const { commentId } = this.props;
+    this.props.getComment(commentId);
   }
 
   handleChange(e) {
@@ -26,7 +25,8 @@ class EditComment extends Component {
 
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
+      id: this.props.commentId
     });
   };
 
@@ -67,7 +67,8 @@ class EditComment extends Component {
   }
 
   render() {
-    const { categories} = this.props;
+     const { comments } = this.props.comments;
+   //  console.log(comments);
 
     const formItemLayout = {
       labelCol: {
@@ -92,52 +93,19 @@ class EditComment extends Component {
         </div>
 
         <Modal
-          title="Edit the post"
+          title="Edit Comment"
           visible={this.state.visible}
           onOk={this.handleOk}
           okText={"Submit"}
           onCancel={this.handleCancel}
         >
-          <Form onSubmit={this.handleSubmit}>
-            <FormItem {...formItemLayout} label="Category">
-              {
-                <Select
-                  name="category"
-                  type="text"
-                  value={this.state.category}
-                  onChange={this.handleChangeSelect}
-                >
-                  {categories &&
-                    Object.keys(categories).map((category, index) => {
-                      return (
-                        <Option
-                          key={categories[category].name}
-                          value={categories[category].name}
-                        >
-                          {categories[category].name}
-                        </Option>
-                      );
-                    })}
-                </Select>
-              }
-            </FormItem>
-            <FormItem {...formItemLayout} label="Author">
+          <Form>
+          <FormItem {...formItemLayout} label="Author">
               {
                 <Input
                   type="text"
                   name="author"
-                  value={this.state.author}
-                  onChange={e => this.handleChange(e)}
-                  required
-                />
-              }
-            </FormItem>
-            <FormItem {...formItemLayout} label="Title">
-              {
-                <Input
-                  type="text"
-                  name="title"
-                  value={this.state.title}
+                  value={this.state.id}
                   onChange={e => this.handleChange(e)}
                   required
                 />
@@ -153,9 +121,6 @@ class EditComment extends Component {
                 />
               }
             </FormItem>
-            <FormItem style={{display: 'none'}}>
-              {<Button onClick={() => this.handleOk()}>Add a Post</Button>}
-            </FormItem>
           </Form>
         </Modal>
       </div>
@@ -163,11 +128,11 @@ class EditComment extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, categories }) => {
+const mapStateToProps = ({comments, comment}) => {
     return {
-      categories,
-      post: posts.thisPost
+      comments: comments,
+      comment: comments.comment
     }
  };
 
-export default withRouter(connect(mapStateToProps, { getPost, editComment, deleteComment })(EditComment));
+export default withRouter(connect(mapStateToProps, { getComment, editComment, deleteComment })(EditComment));

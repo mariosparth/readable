@@ -188,9 +188,6 @@ class EditComment extends Component {
                 />
               }
             </FormItem>
-            <FormItem style={{display: 'none'}}>
-              {<Button onClick={() => this.handleOk()}>Add a Post</Button>}
-            </FormItem>
           </Form>
         </Modal>
       </div>

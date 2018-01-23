@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EditPost from "./EditPost";
+import EditComment from "./EditComment";
 import AddComment from "./AddComment";
 import { connect } from "react-redux";
 import { getPost, deletePost } from "../actions/posts";
@@ -39,7 +40,7 @@ class Post extends Component {
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
-                  <EditPost id={post.id}/>
+                  <EditComment commentId={comment.id}/>
                     <div><b>{comment.author}</b> says: </div>
                     <div>{comment.body}</div>
                     <div>Score: {comment.voteScore}</div>
