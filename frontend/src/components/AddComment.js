@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Modal, Button, Form, Input, Select, message, notification } from "antd";
 import { connect } from "react-redux";
 import { addComment } from "../actions/comments";
-import { getPost } from "../actions/posts";
 import uuid from "uuid";
 
 const { TextArea } = Input;
@@ -40,12 +39,12 @@ class AddComment extends Component {
     const comment = this.state;
     comment.parentId = id;
     comment.timestamp = Date.now();
-    
+
     this.props.addComment(comment);
     this.setState({
       visible: false
     });
-    this.props.getPost(id);
+
     this.openNotificationWithIcon('success');
   };
 
@@ -56,7 +55,6 @@ class AddComment extends Component {
   };
 
   render() {
-    
 
     const formItemLayout = {
       labelCol: {
@@ -70,10 +68,12 @@ class AddComment extends Component {
     };
 
     return (
-      <div>
-        <Button icon="file-add" className="Add-post" title="Add New Cooment" onClick={this.showModal} />
+      <div style={{ textAlign:'center' , margin: '20px'}}>
+        <Button icon="file-add" className="Add-comment" type="primary" title="Add New Cooment" onClick={this.showModal}>
+          Add Comment
+        </Button>
         <Modal
-          title="Add New Post"
+          title="Add New Comment"
           visible={this.state.visible}
           onOk={this.handleOk}
           okText={"Submit"}
@@ -111,9 +111,8 @@ class AddComment extends Component {
 
 const mapStateToProps = state => {
   return {
-    post: state.posts.thisPost,
     comments: state.comments
   };
 };
 
-export default connect(mapStateToProps, { addComment, getPost })(AddComment);
+export default connect(mapStateToProps, { addComment })(AddComment);

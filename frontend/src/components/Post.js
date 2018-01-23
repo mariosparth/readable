@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getPost, deletePost } from "../actions/posts";
 import { getComments } from "../actions/comments";
 import Moment from "react-moment";
+import Header from './Header';
 
 class Post extends Component {
   state = {
@@ -35,15 +36,15 @@ class Post extends Component {
               <div>Post Score: {post.voteScore}</div>
               <p>Last edit at: <Moment unix>{post.timestamp / 1000}</Moment></p>
               <h4>Number of comments: {post.commentCount}</h4>
-              <AddComment id={post.id}/>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
-                    <p>{comment.author} wrote:</p>
+                    <div><b>{comment.author}</b> says: </div>
                     <div>{comment.body}</div>
-                    <div>Comment Score: {comment.voteScore}</div>
+                    <div>Score: {comment.voteScore}</div>
                   </div>;
               })}
+              <AddComment id={post.id}/>
           </div> : <div> This post doesn't exist.</div>}
       </div>;
   }

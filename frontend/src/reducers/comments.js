@@ -11,7 +11,7 @@ export default function comments(state = {}, action) {
     case ADD_COMMENT:
       return {
         ...state,
-        comment: state.comments.concat(action.comment),
+        comments: state.comments.concat(action.comment),
       };
     default:
       return state;
