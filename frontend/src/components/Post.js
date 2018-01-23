@@ -40,7 +40,7 @@ class Post extends Component {
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
-                  <EditComment commentId={comment.id}/>
+                  <EditComment commentId={comment.id} commentBody={comment.body} commentAuthor={comment.author}/>
                     <div><b>{comment.author}</b> says: </div>
                     <div>{comment.body}</div>
                     <div>Score: {comment.voteScore}</div>

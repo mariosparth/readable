@@ -11,47 +11,35 @@ const Option = Select.Option;
 
 class EditComment extends Component {
   state = {
-    visible: false
+    visible: false,
+    id: this.props.commentId,
+    body: this.props.commentBody,
+    author: this.props.commentAuthor,
+    parentId: '8xf0y6ziyjabvozdd253nd',
+    timestamp: Date.now()
   };
 
-  componentDidMount() {
-    const { commentId } = this.props;
-    this.props.getComment(commentId);
-  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(e.target.value);
   }
 
   showModal = () => {
     this.setState({
-      visible: true,
-      id: this.props.commentId
+      visible: true
     });
-  };
-
-  openNotificationWithIcon = (type) => {
-    if(type === 'success'){
-      notification[type]({
-        message: 'The Comment has been upadted',
-        duration: 2.5
-      });
-
-  } else {
-    notification['success']({
-      message: 'The Comment has been deleted',
-      duration: 2.5
-    });
-    }
   };
 
   handleOk = () => {
     const data = this.state;
+    console.log(data);
+    
     this.props.editComment(data);
     this.setState({
       visible: false
     });
-    this.openNotificationWithIcon('success');
+  //  this.openNotificationWithIcon("success");
   };
 
   handleCancel = () => {
@@ -63,12 +51,10 @@ class EditComment extends Component {
   deleteComment = () => {
     const data = this.state;
     this.props.deleteComment(data);
-    this.openNotificationWithIcon('successDeletion');
-  }
+    this.openNotificationWithIcon("successDeletion");
+  };
 
   render() {
-     const { comments } = this.props.comments;
-   //  console.log(comments);
 
     const formItemLayout = {
       labelCol: {
@@ -84,12 +70,22 @@ class EditComment extends Component {
     return (
       <div>
         <div className="action-controls comment">
-          <Button icon="edit" type="primary" title="Edit Comment" onClick={this.showModal} />
+          <Button
+            icon="edit"
+            type="primary"
+            title="Edit Comment"
+            onClick={this.showModal}
+          />
 
-          <Popconfirm title="Are you sure delete this post?" onConfirm={this.deleteComment}  okText="Yes" cancelText="No"  placement="bottomRight">
-              <Button icon="delete" type="danger"  title="Delete Comment" />
+          <Popconfirm
+            title="Are you sure delete this post?"
+            onConfirm={this.deleteComment}
+            okText="Yes"
+            cancelText="No"
+            placement="bottomRight"
+          >
+            <Button icon="delete" type="danger" title="Delete Comment" />
           </Popconfirm>
-
         </div>
 
         <Modal
@@ -100,12 +96,12 @@ class EditComment extends Component {
           onCancel={this.handleCancel}
         >
           <Form>
-          <FormItem {...formItemLayout} label="Author">
+            <FormItem {...formItemLayout} label="Author">
               {
                 <Input
                   type="text"
                   name="author"
-                  value={this.state.id}
+                  value={this.state.author}
                   onChange={e => this.handleChange(e)}
                   required
                 />
@@ -135,4 +131,4 @@ const mapStateToProps = ({comments, comment}) => {
     }
  };
 
-export default withRouter(connect(mapStateToProps, { getComment, editComment, deleteComment })(EditComment));
+export default connect(mapStateToProps, { getComment, editComment, deleteComment })(EditComment);
