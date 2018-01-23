@@ -55,7 +55,7 @@ class AddPost extends Component {
   openNotificationWithIcon = (type) => {
     notification[type]({
       message: 'New Post has been added successfully',
-      duration: 3.5
+      duration: 2.5
     });
   };
 
@@ -63,7 +63,6 @@ class AddPost extends Component {
   handleOk = e => {
     this.validate();
     const dataPost = this.state;
-    // /console.log(dataPost.timestamp.toUTCString());
     this.props.addPost(dataPost);
     this.setState({
       visible: false

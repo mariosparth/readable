@@ -63,13 +63,13 @@ class EditPost extends Component {
     if(type === 'success'){
       notification[type]({
         message: 'The Post has been upadted',
-        duration: 3.5
+        duration: 2.5
       });
 
   } else {
     notification['success']({
       message: 'The Post has been deleted',
-      duration: 3.5
+      duration: 2.5
     });
     }
   };

@@ -1,4 +1,4 @@
-import { GET_COMMENTS } from '../actions/types';
+import { GET_COMMENTS, ADD_COMMENT } from '../actions/types';
 
 
 export default function comments(state = {}, action) {
@@ -7,6 +7,11 @@ export default function comments(state = {}, action) {
       return {
         ...state,
         comments: action.comments,
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comment: state.comments.concat(action.comment),
       };
     default:
       return state;

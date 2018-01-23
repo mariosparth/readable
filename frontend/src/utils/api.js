@@ -89,3 +89,16 @@ export const deletePost = (post) => {
     .then(response => response.json())
     .then(data => data)
 };
+
+export const addComment = (comment) => {
+  return fetch(
+    `${api}/comments`,
+    {
+      method: 'POST',
+      body: JSON.stringify(comment),
+      headers
+    }
+  )
+  .then(response => response.json())
+  .then(data => data)
+};
