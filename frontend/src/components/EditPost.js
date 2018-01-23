@@ -9,7 +9,7 @@ const { TextArea } = Input;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class EditPost extends Component {
+class EditComment extends Component {
   state = {
     author: '',
     category: '',
@@ -62,7 +62,7 @@ class EditPost extends Component {
   openNotificationWithIcon = (type) => {
     if(type === 'success'){
       notification[type]({
-        message: 'The Post has been upadted',
+        message: 'The Post has been updated',
         duration: 2.5
       });
 
@@ -205,4 +205,4 @@ const mapStateToProps = ({ posts, categories }) => {
     }
  };
 
-export default withRouter(connect(mapStateToProps, { getPost, editPost, deletePost })(EditPost));
+export default withRouter(connect(mapStateToProps, { getPost, editPost, deletePost })(EditComment));

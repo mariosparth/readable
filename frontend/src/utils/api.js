@@ -92,13 +92,47 @@ export const deletePost = (post) => {
 
 export const addComment = (comment) => {
   return fetch(
-    `${api}/comments`,
-    {
-      method: 'POST',
-      body: JSON.stringify(comment),
-      headers
-    }
-  )
-  .then(response => response.json())
-  .then(data => data)
+      `${api}/comments`, {
+        method: 'POST',
+        body: JSON.stringify(comment),
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
+};
+
+export const getComment = (id) => {
+  return fetch(
+      `${api}/comments/${id}`, {
+        method: 'GET',
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
+};
+
+
+export const editComment = (comment) => {
+  return fetch(
+      `${api}/comments/${comment.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(comment),
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
+};
+
+export const deleteComment = (comment) => {
+  return fetch(
+      `${api}/comments/${comment.id}`, {
+        method: 'DELETE',
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
 };
