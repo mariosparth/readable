@@ -75,7 +75,7 @@ class Posts extends Component {
                     to={`/${post.category}/${post.id}`}
                     params={{ id: post.id }}
                   >
-                    <h3>{post.title}</h3>
+                  <h2 className="nav-text">{post.title}</h2>
                   </Link>
                   <p>
                     Last edited at:{" "}
@@ -97,7 +97,7 @@ class Posts extends Component {
                 </div>
               )) : posts.map(post => <div className="post" key={post.id}>
                 <Link to={`/${post.category}/${post.id}`} params={{ id: post.id }}>
-                  <h3 className="nav-text">{post.title}</h3>
+                  <h2 className="nav-text">{post.title}</h2>
                 </Link>
 
                 <p>

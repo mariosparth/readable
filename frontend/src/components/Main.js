@@ -10,8 +10,10 @@ class Main extends Component {
 
     return (
       <div className="App">
-        <Header />
-        <Posts category={category} />
+        <div className="main-content">
+          <Header />
+          <Posts category={category} />
+        </div>
       </div>
     );
   }

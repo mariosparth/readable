@@ -35,28 +35,7 @@ class Header extends Component {
     const { categories } = this.state;
 
     return (
-      <div className="header">
-        {/* <div>
-          <Menu
-            style={{ width: 256 }}
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            mode={this.state.mode}
-            theme={this.state.theme}
-          >
-            <Menu.Item key="1">
-              <Link to="/" className="nav-text">
-                <Icon type="calendar" />All
-              </Link>
-            </Menu.Item>
-
-            <Menu.Item key="2">
-              <Icon type="calendar" />
-              Navigation Two
-            </Menu.Item>
-          </Menu>
-        </div> */}
-
+      <div className="header-categories">
         <span>
           <Link to="/" className="nav-text">
           <Button onClick={() => this.someFunct()} className={this.state.active ===  'all' ? 'active' : ''} type="">

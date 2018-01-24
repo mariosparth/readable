@@ -8,6 +8,8 @@ import { getComments } from "../actions/comments";
 import Moment from "react-moment";
 import Header from './Header';
 import Vote from './Vote';
+import { Link } from 'react-router-dom';
+import { Icon, Button } from 'antd';
 
 class Post extends Component {
   state = {
@@ -29,6 +31,15 @@ class Post extends Component {
     const { comments } = this.props.comments;
 
     return <div className="main-content">
+    <div className="header">
+      <span>
+        <Link to="/" className="nav-text">
+        <Button>
+          <Icon type="left-circle" />Back
+          </Button>
+        </Link>
+      </span>
+    </div>
         {post && post.title ? <div className="post-details">
             <div className="post-content">
               <EditPost id={post.id}/>
