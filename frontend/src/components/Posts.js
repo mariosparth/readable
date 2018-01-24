@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import AddPost from './AddPost';
 import Moment from "react-moment";
+import Vote from './Vote';
 
 class Posts extends Component {
   state = {
@@ -70,10 +71,16 @@ class Posts extends Component {
               .filter(post => post.category === category)
               .map(post => (
                 <div className="post" key={post.id}>
-                  <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
+                  <Link
+                    to={`/${post.category}/${post.id}`}
+                    params={{ id: post.id }}
+                  >
                     <h3>{post.title}</h3>
                   </Link>
-                  <p>Last edited at: <Moment unix>{post.timestamp / 1000}</Moment></p>
+                  <p>
+                    Last edited at:{" "}
+                    <Moment unix>{post.timestamp / 1000}</Moment>
+                  </p>
                   <p>
                     <b>Body:</b> {post.body}
                   </p>
@@ -83,16 +90,21 @@ class Posts extends Component {
                   <p>
                     <b>Category:</b> {post.category}
                   </p>
-                  <p>
-                    <b>Votes:</b> {post.voteScore}
-                  </p>
+                  <div>
+                    <b>Post Score:</b>
+                    <Vote value={post} />
+                  </div>
                 </div>
               )) : posts.map(post => <div className="post" key={post.id}>
-                <Link to={`/${post.category}/${post.id}`} params={{id: post.id}}>
+                <Link to={`/${post.category}/${post.id}`} params={{ id: post.id }}>
                   <h3 className="nav-text">{post.title}</h3>
                 </Link>
 
-                <p>Last edited at: <Moment unix>{post.timestamp / 1000}</Moment></p>
+                <p>
+                  Last edited at: <Moment unix>
+                    {post.timestamp / 1000}
+                  </Moment>
+                </p>
 
                 <p>
                   <b>Body:</b> {post.body}
@@ -103,9 +115,10 @@ class Posts extends Component {
                 <p>
                   <b>Category:</b> {post.category}
                 </p>
-                <p>
-                  <b>Votes:</b> {post.voteScore}
-                </p>
+                <div>
+                  <b>Post Score:</b>
+                  <Vote value={post} />
+                </div>
               </div>)}
 
         {}

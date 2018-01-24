@@ -7,6 +7,7 @@ import { getPost, deletePost } from "../actions/posts";
 import { getComments } from "../actions/comments";
 import Moment from "react-moment";
 import Header from './Header';
+import Vote from './Vote';
 
 class Post extends Component {
   state = {
@@ -34,13 +35,14 @@ class Post extends Component {
               <h2>{post.title}</h2>
               <p>written by {post.author}</p>
               <p>{post.body}</p>
-              <div>Post Score: {post.voteScore}</div>
+              <div>Post Score:</div>
+              <Vote value={post} />
               <p>Last edit at: <Moment unix>{post.timestamp / 1000}</Moment></p>
               <h4>Number of comments: {post.commentCount}</h4>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
-                  <EditComment commentId={comment.id} commentBody={comment.body} commentAuthor={comment.author}/>
+                  <EditComment commentId={comment.id} commentBody={comment.body} commentAuthor={comment.author} parentId={post.parentId}/>
                     <div><b>{comment.author}</b> says: </div>
                     <div>{comment.body}</div>
                     <div>Score: {comment.voteScore}</div>

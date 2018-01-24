@@ -136,3 +136,32 @@ export const deleteComment = (comment) => {
     .then(response => response.json())
     .then(data => data)
 };
+
+
+export const vote = (id, option, type) => {
+  const voteData = {id, option};
+
+  if(type === 'post'){
+    return fetch(
+      `${api}/posts/${id}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(voteData),
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
+  } else {
+    return fetch(
+      `${api}/comments/${id}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(voteData),
+        headers
+      }
+    )
+    .then(response => response.json())
+    .then(data => data)
+  }
+};

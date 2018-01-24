@@ -15,14 +15,13 @@ class EditComment extends Component {
     id: this.props.commentId,
     body: this.props.commentBody,
     author: this.props.commentAuthor,
-    parentId: '8xf0y6ziyjabvozdd253nd',
+    parentId: this.props.parentId,
     timestamp: Date.now()
   };
 
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(e.target.value);
   }
 
   showModal = () => {
@@ -33,7 +32,6 @@ class EditComment extends Component {
 
   handleOk = () => {
     const data = this.state;
-    console.log(data);
     
     this.props.editComment(data);
     this.setState({
@@ -55,6 +53,7 @@ class EditComment extends Component {
   };
 
   render() {
+    const { comment } = this.props.comments;
 
     const formItemLayout = {
       labelCol: {
