@@ -94,7 +94,6 @@ class EditComment extends Component {
   }
 
   deletePost = () => {
-    console.log('this.state ',this.state);
     const deletePostData = this.state;
     this.props.deletePost(deletePostData);
     this.props.history.push('/');

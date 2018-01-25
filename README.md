@@ -6,8 +6,6 @@ This repository includes the code for the backend API Server that you'll use to 
 
 ## Start Server
 
-To get started developing right away:
-
 * Install and start the API server
     - `cd api-server`
     - `npm install`
@@ -16,3 +14,10 @@ To get started developing right away:
 ## API Server
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+
+## Start Frontend
+
+* In another terminal window, install and start the frontend part of the project
+    - `cd frontend`
+    - `npm install`
+    - `npm start`

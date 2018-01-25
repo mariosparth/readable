@@ -56,7 +56,7 @@ class Post extends Component {
                   <EditComment commentId={comment.id} commentBody={comment.body} commentAuthor={comment.author} parentId={post.parentId}/>
                     <div><b>{comment.author}</b> says: </div>
                     <div>{comment.body}</div>
-                    <div>Score: {comment.voteScore}</div>
+                    <div><Vote value={comment} /></div>
                   </div>;
               })}
               <AddComment id={post.id}/>

@@ -19,7 +19,6 @@ class EditComment extends Component {
     timestamp: Date.now()
   };
 
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -30,14 +29,28 @@ class EditComment extends Component {
     });
   };
 
+  openNotificationWithIcon = type => {
+    if (type === "success") {
+      notification[type]({
+        message: "The Comment has been updated",
+        duration: 2.5
+      });
+    } else {
+      notification["success"]({
+        message: "The Comment has been deleted",
+        duration: 2.5
+      });
+    }
+  };
+
   handleOk = () => {
     const data = this.state;
-    
+
     this.props.editComment(data);
     this.setState({
       visible: false
     });
-  //  this.openNotificationWithIcon("success");
+    this.openNotificationWithIcon("success");
   };
 
   handleCancel = () => {
@@ -77,7 +90,7 @@ class EditComment extends Component {
           />
 
           <Popconfirm
-            title="Are you sure delete this post?"
+            title="Are you sure delete this comment?"
             onConfirm={this.deleteComment}
             okText="Yes"
             cancelText="No"
