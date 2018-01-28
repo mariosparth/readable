@@ -15,6 +15,7 @@ class Vote extends Component {
 
     const { value, vote } = this.props; // value : post or comment
     const score = vote[value.id] === undefined ? value.voteScore : vote[value.id];
+    const commentCount = value.commentCount;
 
     let type;
     if (value.hasOwnProperty('parentId')) {
@@ -23,19 +24,15 @@ class Vote extends Component {
       type = 'post';
     }
 
-    return (
-      <div>
-         <p>{score}</p>
-        <Button
-          icon="like"
-          onClick={() => this.vote(value.id, 'upVote', type)}
-        />{' '}
-        <Button
-          icon="dislike"
-          onClick={() => this.vote(value.id, 'downVote', type)}
-        />
-      </div>
-    );
+    return <div>
+        <p className="numberComments">
+          <b>Number of comments:</b> {commentCount}
+        </p>
+        <p>
+          <b>Post Score:</b> {score}
+        </p>
+        <Button icon="like" onClick={() => this.vote(value.id, "upVote", type)} /> <Button icon="dislike" onClick={() => this.vote(value.id, "downVote", type)} />
+      </div>;
   }
 }
 

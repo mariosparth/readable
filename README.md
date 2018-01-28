@@ -1,23 +1,48 @@
-# Readable Project
+# readable
+This is my version of *Readable* project for Udacity React Nano degree.
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## Prerequisites
 
-## Start Server
+You will need to have Node.js and npm installed in your machine in order to run this project.
+I'm using *Node v8.9.4* and *npm 5.6.0*
 
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
+## How to make this code run
 
-## API Server
+Download or clone this repository.
 
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+Then, go to project folder using:
 
-## Start Frontend
+```
+> cd readable
+```
 
-* In another terminal window, install and start the frontend part of the project
-    - `cd frontend`
-    - `npm install`
-    - `npm start`
+## To install and run backend project
+
+Go to api-server folder and run
+
+```
+> cd api-server; npm install
+```
+
+This should run for some minutes, be patient. When it finishes, type:
+
+```
+> node server
+```
+
+## To install and run frontend project
+
+Go to frontend folder and run
+
+```
+> cd frontend; npm install
+```
+
+This should run for some minutes, be patient. When it finishes, type:
+
+```
+> npm start
+```
+
+A new window sould open in your default browser and you can play around with my app.

@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import AddPost from './AddPost';
+import EditPost from './EditPost';
 import Moment from "react-moment";
 import Vote from './Vote';
+import { getComments } from "../actions/comments";
+
 
 class Posts extends Component {
   state = {
     posts: [],
-    sort: false,
+    sort: false
   };
 
   componentDidMount() {
-    this.props.fetchAllPosts().then((data) => {
+    this.props.fetchAllPosts().then(data => {
       this.setState({ posts: data.posts });
     });
   }
@@ -23,31 +26,28 @@ class Posts extends Component {
     const { posts } = this.props.posts;
     const { sort } = this.state;
 
-    if(type === 'voteScore'){
+    if (type === "voteScore") {
       return this.setState({
         posts: posts.sort((a, b) => {
-          if(!sort) {
+          if (!sort) {
             return a.voteScore > b.voteScore;
-          }else {
+          } else {
             return a.voteScore < b.voteScore;
           }
         }),
         sort: !sort
       });
-
     } else {
-
       return this.setState({
         posts: posts.sort((a, b) => {
-          if(!sort) {
+          if (!sort) {
             return a.timestamp > b.timestamp;
-          }else {
+          } else {
             return a.timestamp < b.timestamp;
           }
         }),
         sort: !sort
       });
-
     }
   }
 
@@ -75,12 +75,13 @@ class Posts extends Component {
                     to={`/${post.category}/${post.id}`}
                     params={{ id: post.id }}
                   >
-                  <h2 className="nav-text">{post.title}</h2>
+                    <h2 className="nav-text">{post.title}</h2>
                   </Link>
                   <p>
                     Last edited at:{" "}
                     <Moment unix>{post.timestamp / 1000}</Moment>
                   </p>
+                  <EditPost id={post.id} />
                   <p>
                     <b>Body:</b> {post.body}
                   </p>
@@ -91,7 +92,6 @@ class Posts extends Component {
                     <b>Category:</b> {post.category}
                   </p>
                   <div>
-                    <b>Post Score:</b>
                     <Vote value={post} />
                   </div>
                 </div>
@@ -105,6 +105,7 @@ class Posts extends Component {
                     {post.timestamp / 1000}
                   </Moment>
                 </p>
+                <EditPost id={post.id} />
 
                 <p>
                   <b>Body:</b> {post.body}
@@ -116,7 +117,6 @@ class Posts extends Component {
                   <b>Category:</b> {post.category}
                 </p>
                 <div>
-                  <b>Post Score:</b>
                   <Vote value={post} />
                 </div>
               </div>)}
@@ -127,7 +127,7 @@ class Posts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    posts: state.posts
+    posts: state.posts,
   });
 
-export default connect(mapStateToProps, { fetchAllPosts })(Posts);
+export default connect(mapStateToProps, { fetchAllPosts, getComments })(Posts);

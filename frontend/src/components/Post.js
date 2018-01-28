@@ -10,6 +10,7 @@ import Header from './Header';
 import Vote from './Vote';
 import { Link } from 'react-router-dom';
 import { Icon, Button } from 'antd';
+import NotFound from './NotFound';
 
 class Post extends Component {
   state = {
@@ -29,6 +30,10 @@ class Post extends Component {
   render() {
     const { post } = this.props;
     const { comments } = this.props.comments;
+    let numOfComments = 0;
+    if(comments){
+      numOfComments = comments.length;
+    }
 
     return <div className="main-content">
     <div className="header">
@@ -49,7 +54,7 @@ class Post extends Component {
               <div>Post Score:</div>
               <Vote value={post} />
               <p>Last edit at: <Moment unix>{post.timestamp / 1000}</Moment></p>
-              <h4>Number of comments: {post.commentCount}</h4>
+              <h4>Number of comments: {numOfComments}</h4>
             </div>
             {comments && comments.map(comment => {
                 return <div className="post-comment" key={comment.id}>
@@ -60,7 +65,10 @@ class Post extends Component {
                   </div>;
               })}
               <AddComment id={post.id}/>
-          </div> : <div> This post doesn't exist.</div>}
+          </div> : 
+          <div> 
+            <NotFound />  
+          </div>}
       </div>;
   }
 }

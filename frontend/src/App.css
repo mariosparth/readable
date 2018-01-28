@@ -37,6 +37,9 @@ h2 {
   margin: 5px 0;
 }
 
+.post-comment .numberComments {
+  display: none;
+}
 .space {
   margin-left: 5px !important;
 }
